@@ -1,12 +1,7 @@
 package com.mycompany.myapp.web.rest
 
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter.event
-
-import java.io.IOException
-import java.security.Principal
-import java.util.Optional
-
-import org.slf4j.Logger
+import com.mycompany.myapp.config.KafkaSseConsumer
+import com.mycompany.myapp.config.KafkaSseProducer
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.cloud.stream.annotation.StreamListener
@@ -16,18 +11,18 @@ import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.MessageHeaders
 import org.springframework.messaging.support.GenericMessage
 import org.springframework.util.MimeTypeUtils
-
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter
-
-import com.mycompany.myapp.config.KafkaSseConsumer
-import com.mycompany.myapp.config.KafkaSseProducer
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter.event
+import java.io.IOException
+import java.security.Principal
+import java.util.Optional
 
 @RestController
 @RequestMapping("/api/kotlin-hipster-kafka")
 class KotlinHipsterKafkaResource(
-    @Qualifier(KafkaSseProducer.CHANNELNAME) val output: MessageChannel 
+    @Qualifier(KafkaSseProducer.CHANNELNAME) val output: MessageChannel
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -60,7 +55,7 @@ class KotlinHipsterKafkaResource(
     }
 
     @StreamListener(value = KafkaSseConsumer.CHANNELNAME, copyHeaders = "false")
-    fun consume(message: Message<String> ) {
+    fun consume(message: Message<String>) {
         log.debug("Got message from kafka stream: ${message.payload}")
         emitters.entries
             .map { it.value }

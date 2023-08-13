@@ -1,34 +1,27 @@
 package com.mycompany.myapp.web.rest
 
+import com.mycompany.myapp.IntegrationTest
+import com.mycompany.myapp.config.EmbeddedKafka
+import com.mycompany.myapp.config.KafkaSseConsumer
+import com.mycompany.myapp.config.KafkaSseProducer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.cloud.stream.test.binder.MessageCollector
+import org.springframework.messaging.MessageChannel
+import org.springframework.messaging.MessageHeaders
+import org.springframework.messaging.support.GenericMessage
+import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.request
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.BlockingQueue;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.cloud.stream.test.binder.MessageCollector;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.support.GenericMessage;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.util.MimeTypeUtils;
-import com.mycompany.myapp.IntegrationTest;
-import com.mycompany.myapp.config.EmbeddedKafka;
-import com.mycompany.myapp.config.KafkaSseConsumer;
-import com.mycompany.myapp.config.KafkaSseProducer;
+import org.springframework.util.MimeTypeUtils
 
 @IntegrationTest
 @AutoConfigureMockMvc
@@ -53,10 +46,10 @@ class KotlinHipsterKafkaResourceIT {
     @Test
     @Throws(Exception::class)
     fun producesMessages() {
-      
+
         restMockMvc.perform(post("/api/kotlin-hipster-kafka/publish?message=value-produce"))
             .andExpect(status().isOk)
-      
+
         val messages = collector.forChannel(output)
         val payload = messages.take() as GenericMessage<String>
         assertThat(payload.payload).isEqualTo("value-produce")
@@ -66,7 +59,7 @@ class KotlinHipsterKafkaResourceIT {
     @Throws(Exception::class)
     fun consumesMessages() {
         val map = mutableMapOf<String, Any>()
-        map[MessageHeaders.CONTENT_TYPE] =  MimeTypeUtils.TEXT_PLAIN_VALUE
+        map[MessageHeaders.CONTENT_TYPE] = MimeTypeUtils.TEXT_PLAIN_VALUE
         val headers = MessageHeaders(map)
         val testMessage = GenericMessage<String>("value-consume", headers)
         val mvcResult = restMockMvc

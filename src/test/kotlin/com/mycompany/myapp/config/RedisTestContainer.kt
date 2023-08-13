@@ -1,14 +1,12 @@
 package com.mycompany.myapp.config
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.output.Slf4jLogConsumer
-import org.testcontainers.utility.DockerImageName
 
-class RedisTestContainer: InitializingBean, DisposableBean {
+class RedisTestContainer : InitializingBean, DisposableBean {
 
     private var redisContainer: GenericContainer<*>? = null
     private val log = LoggerFactory.getLogger(javaClass)

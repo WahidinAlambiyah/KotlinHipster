@@ -1,11 +1,9 @@
 package com.mycompany.myapp.security
 
 import com.mycompany.myapp.config.SYSTEM_ACCOUNT
-
-import java.util.Optional
-
 import org.springframework.data.domain.AuditorAware
 import org.springframework.stereotype.Component
+import java.util.Optional
 
 /**
  * Implementation of [AuditorAware] based on Spring Security.

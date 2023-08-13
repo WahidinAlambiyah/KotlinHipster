@@ -1,28 +1,24 @@
 package com.mycompany.myapp.service
 
 import com.mycompany.myapp.IntegrationTest
-import com.mycompany.myapp.config.DEFAULT_LANGUAGE
 import com.mycompany.myapp.domain.User
 import com.mycompany.myapp.repository.UserRepository
-import tech.jhipster.security.RandomUtil
-
 import org.apache.commons.lang3.RandomStringUtils
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.data.auditing.AuditingHandler
 import org.springframework.data.auditing.DateTimeProvider
-import org.springframework.data.domain.PageRequest
 import org.springframework.transaction.annotation.Transactional
-
+import tech.jhipster.security.RandomUtil
 import java.time.Instant
+import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import java.time.temporal.TemporalAccessor
-import java.time.LocalDateTime
 import java.util.Optional
-import org.assertj.core.api.Assertions.assertThat
-import org.mockito.Mockito.`when`
 import kotlin.test.assertNotNull
 
 private const val DEFAULT_LOGIN = "johndoe"

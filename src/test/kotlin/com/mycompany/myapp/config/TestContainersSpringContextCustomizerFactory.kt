@@ -1,24 +1,16 @@
 package com.mycompany.myapp.config
 
-import java.util.*
-
-import java.util.Arrays
-import tech.jhipster.config.JHipsterConstants
-
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
-import org.springframework.beans.factory.support.DefaultSingletonBeanRegistry
+import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.core.annotation.AnnotatedElementUtils
-
 import org.springframework.test.context.ContextConfigurationAttributes
 import org.springframework.test.context.ContextCustomizer
 import org.springframework.test.context.ContextCustomizerFactory
-import org.springframework.beans.factory.support.DefaultListableBeanFactory
-import org.springframework.boot.test.util.TestPropertyValues
 import org.testcontainers.containers.KafkaContainer
+import tech.jhipster.config.JHipsterConstants
+import java.util.*
 
-class TestContainersSpringContextCustomizerFactory: ContextCustomizerFactory {
+class TestContainersSpringContextCustomizerFactory : ContextCustomizerFactory {
 
     private val log = LoggerFactory.getLogger(TestContainersSpringContextCustomizerFactory::class.java)
 
@@ -27,7 +19,7 @@ class TestContainersSpringContextCustomizerFactory: ContextCustomizerFactory {
         private var kafkaBean: KafkaTestContainer? = null
         private var devTestContainer: SqlTestContainer? = null
         private var prodTestContainer: SqlTestContainer? = null
-    }    
+    }
 
     override fun createContextCustomizer(
         testClass: Class<*>,
@@ -56,7 +48,7 @@ class TestContainersSpringContextCustomizerFactory: ContextCustomizerFactory {
                 if (context.environment.activeProfiles.contains("test${JHipsterConstants.SPRING_PROFILE_DEVELOPMENT}")) {
                     if (null == devTestContainer) {
                         try {
-                            val containerClass =  Class.forName("${javaClass.packageName}.PostgreSqlTestContainer") as (Class<out SqlTestContainer>)
+                            val containerClass = Class.forName("${javaClass.packageName}.PostgreSqlTestContainer") as (Class<out SqlTestContainer>)
                             devTestContainer = beanFactory.createBean(containerClass)
                             beanFactory.registerSingleton(containerClass.name, devTestContainer)
                             // (beanFactory as DefaultListableBeanFactory).registerDisposableBean(containerClass.name, devTestContainer)
@@ -89,21 +81,20 @@ class TestContainersSpringContextCustomizerFactory: ContextCustomizerFactory {
                 }
             }
 
-    val kafkaAnnotation = AnnotatedElementUtils.findMergedAnnotation(testClass, EmbeddedKafka::class.java)
-    if (null != kafkaAnnotation) {
-        log.debug("detected the EmbeddedKafka annotation on class {}", testClass.name)
-        log.info("Warming up the kafka broker")
-        if (null == kafkaBean) {
-            kafkaBean = beanFactory.createBean(KafkaTestContainer::class.java)
-            beanFactory.registerSingleton(KafkaTestContainer::class.java.name, kafkaBean)
-            // (beanFactory as (DefaultListableBeanFactory)).registerDisposableBean(KafkaTestContainer::class.java.name, kafkaBean)
-        }
-        kafkaBean?.let {
-            testValues = testValues.and("spring.cloud.stream.kafka.binder.brokers=" + it.getKafkaContainer().host + ':' + it.getKafkaContainer().getMappedPort(KafkaContainer.KAFKA_PORT))
-        }   
-    }
+            val kafkaAnnotation = AnnotatedElementUtils.findMergedAnnotation(testClass, EmbeddedKafka::class.java)
+            if (null != kafkaAnnotation) {
+                log.debug("detected the EmbeddedKafka annotation on class {}", testClass.name)
+                log.info("Warming up the kafka broker")
+                if (null == kafkaBean) {
+                    kafkaBean = beanFactory.createBean(KafkaTestContainer::class.java)
+                    beanFactory.registerSingleton(KafkaTestContainer::class.java.name, kafkaBean)
+                    // (beanFactory as (DefaultListableBeanFactory)).registerDisposableBean(KafkaTestContainer::class.java.name, kafkaBean)
+                }
+                kafkaBean?.let {
+                    testValues = testValues.and("spring.cloud.stream.kafka.binder.brokers=" + it.getKafkaContainer().host + ':' + it.getKafkaContainer().getMappedPort(KafkaContainer.KAFKA_PORT))
+                }
+            }
             testValues.applyTo(context)
         }
     }
-
 }

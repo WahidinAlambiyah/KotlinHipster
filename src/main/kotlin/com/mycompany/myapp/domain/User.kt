@@ -1,11 +1,10 @@
 package com.mycompany.myapp.domain
 
-import com.mycompany.myapp.config.LOGIN_REGEX
-
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.mycompany.myapp.config.LOGIN_REGEX
 import org.hibernate.annotations.BatchSize
-
-import javax.persistence.CascadeType
+import java.io.Serializable
+import java.time.Instant
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -14,23 +13,19 @@ import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.JoinTable
 import javax.persistence.ManyToMany
-import javax.persistence.OneToMany
 import javax.persistence.SequenceGenerator
 import javax.persistence.Table
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
-import java.io.Serializable
-import java.time.Instant
-import java.util.Locale
 
 /**
  * A user.
  */
 @Entity
 @Table(name = "jhi_user")
-class User (
+class User(
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
@@ -86,27 +81,22 @@ class User (
     @Column(name = "reset_date")
     var resetDate: Instant? = null,
     @JsonIgnore
-    
-    
+
     @ManyToMany
     @JoinTable(
         name = "jhi_user_authority",
         joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "authority_name", referencedColumnName = "name")]
     )
-        
+
     @BatchSize(size = 20)
-    
-    
-    
-    var authorities: MutableSet<Authority> = mutableSetOf()
-    ,
+
+    var authorities: MutableSet<Authority> = mutableSetOf(),
     createdBy: String? = null,
     createdDate: Instant? = Instant.now(),
     lastModifiedBy: String? = null,
     lastModifiedDate: Instant? = Instant.now()
 ) : AbstractAuditingEntity<Long>(createdBy, createdDate, lastModifiedBy, lastModifiedDate), Serializable {
-
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

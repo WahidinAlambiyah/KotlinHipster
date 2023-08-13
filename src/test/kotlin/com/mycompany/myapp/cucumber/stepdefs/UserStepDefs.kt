@@ -1,34 +1,26 @@
 package com.mycompany.myapp.cucumber.stepdefs
 
+import com.mycompany.myapp.security.ADMIN
+import com.mycompany.myapp.web.rest.UserResource
 import io.cucumber.java.Before
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
-
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.context.SecurityContext
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.User
-
-import com.mycompany.myapp.web.rest.UserResource
-import com.mycompany.myapp.security.ADMIN
-
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.MockMvc
-
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
-class UserStepDefs: StepDefs() {
+class UserStepDefs : StepDefs() {
 
     @Autowired
     private lateinit var userResource: UserResource
-
-    
 
     private lateinit var userResourceMock: MockMvc
 
@@ -64,7 +56,5 @@ class UserStepDefs: StepDefs() {
     @Then("his last name is {string}")
     fun his_last_name_is(lastName: String) {
         actions?.let { it.andExpect(jsonPath("\$.lastName").value(lastName)) }
-        
     }
-
 }

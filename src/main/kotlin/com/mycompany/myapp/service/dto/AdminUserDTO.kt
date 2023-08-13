@@ -1,12 +1,10 @@
 package com.mycompany.myapp.service.dto
 
 import com.mycompany.myapp.config.LOGIN_REGEX
-import com.mycompany.myapp.domain.Authority
 import com.mycompany.myapp.domain.User
-
 import java.io.Serializable
-import javax.validation.constraints.*
 import java.time.Instant
+import javax.validation.constraints.*
 
 /**
  * A DTO representing a user, with his authorities.
@@ -46,7 +44,7 @@ open class AdminUserDTO(
     var lastModifiedDate: Instant? = null,
 
     var authorities: MutableSet<String> = mutableSetOf()
-): Serializable {
+) : Serializable {
 
     constructor(user: User?) : this(
         user?.id,

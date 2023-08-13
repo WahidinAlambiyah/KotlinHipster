@@ -1,14 +1,11 @@
 package com.mycompany.myapp
 
-import com.mycompany.myapp.KotlinHipsterApp
 import com.mycompany.myapp.config.AsyncSyncConfiguration
 import com.mycompany.myapp.config.EmbeddedKafka
-import com.mycompany.myapp.config.EmbeddedSQL
 import com.mycompany.myapp.config.EmbeddedRedis
-import org.junit.jupiter.api.extension.ExtendWith
-
-import org.springframework.test.annotation.DirtiesContext
+import com.mycompany.myapp.config.EmbeddedSQL
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.annotation.DirtiesContext
 
 /**
  * Base composite annotation for integration tests.
@@ -20,5 +17,4 @@ import org.springframework.boot.test.context.SpringBootTest
 @EmbeddedKafka
 @EmbeddedSQL
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-annotation class IntegrationTest {
-}
+annotation class IntegrationTest

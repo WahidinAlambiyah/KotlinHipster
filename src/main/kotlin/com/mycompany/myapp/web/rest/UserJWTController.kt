@@ -1,11 +1,9 @@
 package com.mycompany.myapp.web.rest
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.mycompany.myapp.security.jwt.JWTFilter
 import com.mycompany.myapp.security.jwt.TokenProvider
 import com.mycompany.myapp.web.rest.vm.LoginVM
-
-import com.fasterxml.jackson.annotation.JsonProperty
-
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-
 import javax.validation.Valid
 
 /**

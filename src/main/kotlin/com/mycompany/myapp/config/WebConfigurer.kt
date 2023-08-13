@@ -1,9 +1,6 @@
 package com.mycompany.myapp.config
 
-import tech.jhipster.config.JHipsterConstants
-import tech.jhipster.config.JHipsterProperties
 import org.slf4j.LoggerFactory
-import org.springframework.boot.web.server.MimeMappings
 import org.springframework.boot.web.server.WebServerFactory
 import org.springframework.boot.web.server.WebServerFactoryCustomizer
 import org.springframework.boot.web.servlet.ServletContextInitializer
@@ -12,20 +9,16 @@ import org.springframework.cloud.stream.annotation.EnableBinding
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
-import org.springframework.core.env.Profiles
 import org.springframework.util.CollectionUtils
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
-
-import javax.servlet.DispatcherType
-import javax.servlet.ServletContext
-import javax.servlet.ServletException
+import tech.jhipster.config.JHipsterProperties
 import java.io.File
+import java.net.URLDecoder.decode
 import java.nio.charset.StandardCharsets
 import java.nio.file.Paths
-import java.util.EnumSet
-
-import java.net.URLDecoder.decode
+import javax.servlet.ServletContext
+import javax.servlet.ServletException
 
 /**
  * Configuration of web application with Servlet 3.0 APIs.
@@ -33,11 +26,10 @@ import java.net.URLDecoder.decode
 @EnableBinding(KafkaSseConsumer::class, KafkaSseProducer::class)
 @Configuration
 class WebConfigurer(
-    
+
     private val env: Environment,
     private val jHipsterProperties: JHipsterProperties
 ) : ServletContextInitializer, WebServerFactoryCustomizer<WebServerFactory> {
-
 
     private val log = LoggerFactory.getLogger(javaClass)
 
@@ -81,7 +73,6 @@ class WebConfigurer(
         }
         return extractedPath.substring(0, extractionEndIndex)
     }
-
 
     @Bean
     fun corsFilter(): CorsFilter {

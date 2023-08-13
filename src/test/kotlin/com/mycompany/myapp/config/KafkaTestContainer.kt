@@ -1,14 +1,13 @@
 package com.mycompany.myapp.config
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.testcontainers.containers.KafkaContainer
 import org.testcontainers.containers.output.Slf4jLogConsumer
 import org.testcontainers.utility.DockerImageName
 
-class KafkaTestContainer: InitializingBean, DisposableBean {
+class KafkaTestContainer : InitializingBean, DisposableBean {
 
     companion object {
         private val log = LoggerFactory.getLogger(KafkaTestContainer::class.java)
@@ -18,7 +17,7 @@ class KafkaTestContainer: InitializingBean, DisposableBean {
             .withLogConsumer(Slf4jLogConsumer(log))
             .withReuse(true)
     }
-    
+
     override fun destroy() {
         if (null != kafkaContainer && kafkaContainer.isRunning) {
             kafkaContainer.close()

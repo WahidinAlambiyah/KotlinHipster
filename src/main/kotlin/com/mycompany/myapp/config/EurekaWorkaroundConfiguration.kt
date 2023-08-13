@@ -5,19 +5,19 @@
 // https://github.com/spring-cloud/spring-cloud-netflix/issues/3941
 package com.mycompany.myapp.config
 
-import org.springframework.boot.actuate.health.HealthIndicator
 import org.springframework.boot.actuate.health.Health
+import org.springframework.boot.actuate.health.HealthIndicator
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 
 @Component
-class EurekaWorkaroundConfiguration: HealthIndicator {
+class EurekaWorkaroundConfiguration : HealthIndicator {
 
     companion object {
         private var applicationIsUp = false
     }
-    
+
     @EventListener(ApplicationReadyEvent::class)
     fun onStartup() {
         applicationIsUp = true

@@ -1,11 +1,9 @@
 package com.mycompany.myapp.config
 
-
+import com.mycompany.myapp.IntegrationTest
 import org.junit.jupiter.api.ClassDescriptor
 import org.junit.jupiter.api.ClassOrderer
 import org.junit.jupiter.api.ClassOrdererContext
-import com.mycompany.myapp.IntegrationTest
-
 import java.util.Comparator
 
 class SpringBootTestClassOrderer : ClassOrderer {

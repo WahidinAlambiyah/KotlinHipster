@@ -1,7 +1,6 @@
 package com.mycompany.myapp.service.dto
 
 import com.mycompany.myapp.domain.User
-
 import java.io.Serializable
 /**
  * A DTO representing a user, with only the public attributes.
@@ -9,9 +8,9 @@ import java.io.Serializable
 open class UserDTO(
     var id: Long? = null,
     var login: String? = null,
-): Serializable{
+) : Serializable {
 
-    constructor(user: User): this(user.id, user.login)
+    constructor(user: User) : this(user.id, user.login)
 
     override fun toString() = "UserDTO{" +
         "login='" + login + '\'' +
