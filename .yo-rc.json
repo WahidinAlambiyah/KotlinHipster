@@ -1,0 +1,123 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "KotlinHipster",
+    "blueprints": [
+      {
+        "name": "generator-jhipster-kotlin",
+        "version": "1.16.0"
+      }
+    ],
+    "buildTool": "gradle",
+    "cacheProvider": "redis",
+    "clientFramework": "angularX",
+    "clientPackageManager": "npm",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1691763660725,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "devServerPort": 4200,
+    "dtoSuffix": "DTO",
+    "enableGradleEnterprise": false,
+    "enableHibernateCache": false,
+    "enableSwaggerCodegen": false,
+    "enableTranslation": true,
+    "entitySuffix": "",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "7.9.3",
+    "jwtSecretKey": "MmI4YjE1OWVlZjFmNDY4ZDMxZmIzMDA3MGQ1ZWMzNTU5NGNjYTk2MDNmZmRjYzgwOGNhOGQ3YTFmOTdlMWRkNDcxODA1Y2QzZmQ1ZWZmYjVjYWIzZWJhZDFjMzJlMWRjMGMwY2FmNTVlNjg0MzUyYWI4ZGE0YTQ5MTdlN2E5MDQ=",
+    "languages": [
+      "en",
+      "al",
+      "ar-ly",
+      "hy",
+      "by",
+      "bn",
+      "bg",
+      "ca",
+      "zh-cn",
+      "zh-tw",
+      "hr",
+      "cs",
+      "da",
+      "nl",
+      "et",
+      "fa",
+      "fi",
+      "fr",
+      "gl",
+      "de",
+      "el",
+      "hi",
+      "hu",
+      "in",
+      "it",
+      "ja",
+      "ko",
+      "mr",
+      "my",
+      "pl",
+      "pt-br",
+      "pt-pt",
+      "pa",
+      "ro",
+      "ru",
+      "sk",
+      "sr",
+      "si",
+      "es",
+      "sv",
+      "tr",
+      "ta",
+      "te",
+      "th",
+      "ua",
+      "uz-Cyrl-uz",
+      "uz-Latn-uz",
+      "vi"
+    ],
+    "messageBroker": "kafka",
+    "microfrontend": false,
+    "microfrontends": [],
+    "nativeLanguage": "en",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-es-entity-reindexer",
+        "version": "1.0.1"
+      },
+      {
+        "name": "generator-jhipster-postgres-uuid",
+        "version": "0.0.6"
+      },
+      {
+        "name": "generator-jhipster-gql",
+        "version": "0.1.2"
+      },
+      {
+        "name": "generator-jhipster-kafka",
+        "version": "1.0.1"
+      },
+      {
+        "name": "generator-jhipster-aiggenerator",
+        "version": "0.0.1"
+      }
+    ],
+    "packageName": "com.mycompany.myapp",
+    "pages": [],
+    "prodDatabaseType": "postgresql",
+    "reactive": false,
+    "searchEngine": false,
+    "serverPort": "8080",
+    "serverSideOptions": ["messageBroker:kafka"],
+    "serviceDiscoveryType": "eureka",
+    "skipCheckLengthOfIdentifier": false,
+    "skipClient": false,
+    "skipFakeData": false,
+    "skipUserManagement": false,
+    "testFrameworks": ["cucumber"],
+    "websocket": false,
+    "withAdminUi": true
+  }
+}
